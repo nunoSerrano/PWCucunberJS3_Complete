@@ -1,7 +1,8 @@
-import { Given, When, Then } from '@cucumber/cucumber';
+import { Given, When, Then, setDefaultTimeout } from '@cucumber/cucumber';
 import {chromium} from "playwright";
 import path from "path"
 
+setDefaultTimeout(60 * 1000);
 
 Given('The user navigates to the page', async function () {
     console.log("The user navigates to the page");
@@ -27,13 +28,23 @@ Given('The user navigates to the page', async function () {
 });
 
 
-
-When('The user logs in', function () {
+When('The user logs in', async function () {
     console.log("The user logs in");
+    const startJourneyButton = this.page.getByRole('link', { name: 'Start your journey' });
+    await startJourneyButton.click();
+    
 });
 
-
-
-Then('A home is displayed', function () {
+Then('A home is displayed', async function () {
     console.log("A home is displayed");
+
+    await this.page.locator('//input[@name="name"]').fill('Andre');
+    await this.page.locator('//input[@name="surname"]').fill('Silva');
+    await this.page.locator('//input[@name="email"]').fill('asilva@example.com');
+    await this.page.locator('//input[@name="phone_number"]').fill('1234567890');
+    await this.page.locator('//input[@name="street_address"]').fill('Rua do Ouro');
+    await this.page.locator('//input[@name="postal_code"]').fill('1234-000');
+    await this.page.locator('//input[@name="city"]').fill('Lisboa');
+    await this.page.locator('//div[contains(@class,"indicatorContainer")]').click();
+    //await this.page.getByRole('combobox', {name: 'Austria'}).click();
 });
