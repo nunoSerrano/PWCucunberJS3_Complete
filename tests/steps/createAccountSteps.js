@@ -1,5 +1,5 @@
 import {Then} from '@cucumber/cucumber';
-import {getPage} from './baseSteps.js';
+import {getPage} from '../../core/coreLib.js';
 
 
 

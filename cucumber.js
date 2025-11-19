@@ -5,6 +5,7 @@ export default {
     formatOptions: { snippetInterface: 'async-await' },
     paths: ['tests/features/**/*.feature'],          // <-- find all .feature files
     require: [
+      'core/coreLib.js',
       'tests/steps/**/*.js'
     ],
     format: ['progress', 'html:cucumber-report.html']
