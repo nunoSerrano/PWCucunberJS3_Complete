@@ -1,0 +1,21 @@
+{
+  "name": "pwcucunberjs3_complete",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "cucumber-js tests/features --require tests/steps --format progress"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.1",
+    "cucumber-html-reporter": "^7.2.0"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^12.2.0"
+  }
+}
