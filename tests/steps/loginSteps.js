@@ -14,12 +14,16 @@ Given('The user navigates to the page', async function () {
 
     this.browser = await chromium.launch({
         headless: false,
-        ...(executablePath ? { executablePath } : {})
+        ...(executablePath ? { executablePath } : {}),
+        args:['--start-maximized']
+
     })
      
      
-    this.context = await this.browser.newContext();
+    this.context = await this.browser.newContext({viewport: null, javaScriptEnabled: true});
     this.page = await this.context.newPage();
+
+    await this.page.goto("https://monetis-delta.vercel.app")
 });
 
 
