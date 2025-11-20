@@ -6,7 +6,8 @@ export default {
     paths: ['tests/features/**/*.feature'],          // <-- find all .feature files
     require: [
       'core/coreLib.js',
-      'tests/steps/**/*.js'
+      'tests/steps/**/*.js',
+      'tests/pages/**/*.js'
     ],
     format: ['progress', 'html:cucumber-report.html']
   }
