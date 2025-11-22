@@ -1,14 +1,13 @@
 //HomePage.js
 import BasePage from './BasePage.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default class HomePage extends BasePage {
   constructor(page) {
     super(page);
     this.startJourneyButton = this.page.getByRole('link', { name: 'Start your journey' });
-    this.monetisUrl = 'https://monetis-delta.vercel.app'
-    this.monetisLoginUrl = 'https://monetis-delta.vercel.app/login'
   }
-
 
   async navigateToPage(pageToNavigate) {
     console.log(`Navigating to URL: ${pageToNavigate}`);
@@ -17,11 +16,11 @@ export default class HomePage extends BasePage {
 
      switch (pageToNavigate) {
           case "Monetis": {
-              url= this.monetisUrl;
+              url= process.env.MONETIS_URL;
               break;
           }
           case "Monetis - Login": {
-              url= this.monetisLoginUrl;
+              url= process.env.MONETIS_LOGIN_URL;
               break;
           }
           default: {

@@ -1,5 +1,10 @@
 //LoginPage.js
 import BasePage from './BasePage.js';
+import dotenv from 'dotenv';
+dotenv.config();
+
+
+
 
 export default class LoginPage extends BasePage {
 
@@ -11,10 +16,16 @@ export default class LoginPage extends BasePage {
   } 
 
 
+    async fillLoginFields() { 
+        let userEmail = process.env.USER_EMAIL;
+        let userPassword = process.env.USER_PASSWORD;
 
-    async fillLoginFields() {  
-        await this.emailField.fill('asilva@example.com');
-        await this.passwordField.fill('A234567$');
+        console.log(`Filling login fields with email: ${userEmail}`);
+        console.log(`Filling login fields with password: ${userPassword}`);
+         
+        await this.emailField.fill(userEmail);
+        await this.passwordField.fill(userPassword);
+     
     }
 
 
