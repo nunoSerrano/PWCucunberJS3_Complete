@@ -31,9 +31,9 @@ Before (async function () {
 
 
 After(async function () {
-    await page.close();
-    await context.close();
-    await browser.close()
+    // await page.close();
+    // await context.close();
+    // await browser.close()
 });
 
 export function getPage() {

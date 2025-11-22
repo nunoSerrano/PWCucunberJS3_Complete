@@ -1,7 +1,11 @@
-class CreateAccountPage {
+
+//HomePage.js
+import BasePage from './BasePage.js';
+
+export default class CreateAccountPage extends BasePage {
 
     constructor(page) {
-        this.page = page;
+        super(page);
         this.nameField=this.page.locator('//input[@name="name"]');
         this.surnameField=this.page.locator('//input[@name="surname"]');
         this.emailField=this.page.locator('//input[@name="email"]');
@@ -10,11 +14,10 @@ class CreateAccountPage {
         this.addressField=this.page.locator('//input[@name="street_address"]');
         this.cityField=this.page.locator('//input[@name="city"]');
         this.countryDropDownArrow=this.page.locator('//div[contains(@class,"indicatorContainer")]');
-        
 };
   
 
-async createAccountPageFillFields() {
+async FillNewAccountFields() {
 
     await this.nameField.fill('Andre')
     await this.surnameField.fill('Silva');
@@ -24,9 +27,14 @@ async createAccountPageFillFields() {
     await this.postalField.fill('1234-000');
     await this.cityField.fill('Lisboa');
     await this.countryDropDownArrow.click();
-    //await getPage()\.getByRole('combobox', {name: 'Austria'}).click();
+    //to be improved
+    await this.page.getByRole('option', { name: 'Austria' }).click();
+    await this.page.getByRole('textbox', { name: 'Password', exact: true }).fill('A234567$');
+    await this.page.getByRole('textbox', { name: 'Confirm password' }).fill('A234567$');
+    await this.page.getByRole('checkbox', { name: 'You agree to our Terms of' }).check();
+    await this.page.getByRole('button', { name: 'Sign up' }).click();
 
 }
 
+
 }
-export default CreateAccountPage;
