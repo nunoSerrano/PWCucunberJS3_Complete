@@ -1,4 +1,5 @@
 //BasePage.js
+// A base page class that other page classes can extend
 export default class BasePage {
 
     constructor(page) {
