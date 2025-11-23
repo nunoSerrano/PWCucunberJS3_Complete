@@ -6,6 +6,8 @@ export default class CreateAccountPage extends BasePage {
 
     constructor(page) {
         super(page);
+     
+        // Define locators
         this.nameField=this.page.locator('//input[@name="name"]');
         this.surnameField=this.page.locator('//input[@name="surname"]');
         this.emailField=this.page.locator('//input[@name="email"]');

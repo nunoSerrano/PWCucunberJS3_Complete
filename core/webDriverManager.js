@@ -63,9 +63,10 @@ BeforeStep (async function (scenario) {
 });
 
 //uncoment if you want to close the page and context after each scenario
-After(async function () {
+After(async function (scenario) {
     // await page.close();
     // await context.close();
+    console.log(`---------Scenario status: ${scenario.result.status} ---------`); // Log end of scenario in to reports
 });
 
 //uncoment if you want to close the browser after all scenarios

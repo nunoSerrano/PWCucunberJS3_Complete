@@ -6,6 +6,8 @@ dotenv.config();
 export default class HomePage extends BasePage {
   constructor(page) {
     super(page);
+   
+    // Define locators
     this.startJourneyButton = this.page.getByRole('link', { name: 'Start your journey' });
   }
 

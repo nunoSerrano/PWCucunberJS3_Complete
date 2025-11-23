@@ -10,6 +10,8 @@ export default class LoginPage extends BasePage {
 
     constructor(page) {
     super(page);
+  
+    // Define locators
     this.loginButton = this.page.getByRole('button', { name: 'Log in' });
     this.emailField = this.page.getByRole('textbox', { name: 'Email' });
     this.passwordField = this.page.getByRole('textbox', { name: 'Password' });
@@ -19,9 +21,6 @@ export default class LoginPage extends BasePage {
     async fillLoginFields() { 
         let userEmail = process.env.USER_EMAIL;
         let userPassword = process.env.USER_PASSWORD;
-
-        console.log(`Filling login fields with email: ${userEmail}`);
-        console.log(`Filling login fields with password: ${userPassword}`);
          
         await this.emailField.fill(userEmail);
         await this.passwordField.fill(userPassword);
