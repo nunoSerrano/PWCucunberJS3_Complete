@@ -1,5 +1,5 @@
 // core/webDriverManager.js
-// Manages the browser and page instances for Cucumber tests
+// Manages the browser and hooks instances for Cucumber tests
 import { setDefaultTimeout , Before, After, BeforeAll, AfterAll, BeforeStep} from '@cucumber/cucumber';
 import {chromium} from "playwright";
 import path from "path"
@@ -11,15 +11,15 @@ let browser;
 let page;
 let context;
 
-BeforeAll (async function () {
 
-    console.log("Starting test suite - BeforeAll hook");
+export async function initBrowser() {
+  console.log('Starting test suite - initBrowser');
 
-   
-    setDefaultTimeout(parseInt(process.env.defaultTimeout)); //default timeout from .env file
+   const timeout = Number(process.env.defaultTimeout) || 60000; //default timeout or from .env file
+   setDefaultTimeout(timeout);
+     
 
-
-    let browserype= process.env.browser; //browser type from .env file
+    const browserype= process.env.browser; //browser type from .env file
 
     // Launch the browser based on the specified type
     switch (browserype.toLowerCase()) {
@@ -46,34 +46,35 @@ BeforeAll (async function () {
         default:
             throw new Error(`Browser type "${browserype}" is not supported.`);
     }
-
-});
-
-
-Before (async function (scenario) {
-
-    context = await browser.newContext({viewport: null, javaScriptEnabled: true}); // Create a new browser context and page for each scenario
-    page = await context.newPage();  // Create a new page
-    console.log(`---------${new Date().toISOString()} - ${scenario.pickle.name} ---------`); // Log scenario name in to reports
-
-}); 
-
-BeforeStep (async function (scenario) {
-    console.log(`>> Starting step : ${scenario.pickleStep.text}`); // Log step name before each step
-});
-
-//uncoment if you want to close the page and context after each scenario
-After(async function (scenario) {
-    // await page.close();
-    // await context.close();
-    console.log(`---------Scenario status: ${scenario.result.status} ---------`); // Log end of scenario in to reports
-});
-
-//uncoment if you want to close the browser after all scenarios
-AfterAll (async function () {
-    //await browser.close();
-});
-
-export function getPage() {
-    return page; // Function to get the current page instance
 }
+
+export async function createScenarioContext() {
+    if (!browser) {
+        throw new Error('Browser not initialized. Call initBrowser() first.');
+    }
+    context = await browser.newContext({
+        viewport: null,
+        javaScriptEnabled: true,
+    });
+
+     page = await context.newPage();
+}
+
+export async function closeScenarioContext() {
+
+    if (page) await page.close();
+    if (context) await context.close();
+}
+
+export async function closeBrowser() {
+    if (browser) {
+        await browser.close();
+        browser = undefined;
+    }
+}
+
+
+// Function to get the current page instance
+export function getPage() {
+    return page;
+} 

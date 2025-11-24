@@ -1,10 +1,12 @@
 //BasePage.js
 // A base page class that other page classes can extend
 export default class BasePage {
-pageName = "BasePage"
+
     constructor(page) {
         this.page = page;
-    
+        if (!page) {
+            throw new Error(`[BasePage] constructed without a page`);
+        }
     };
 
 

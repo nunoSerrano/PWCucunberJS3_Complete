@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "cucumber-js tests/features --require tests/steps --format progress",
-    "test:regression": "cucumber-js tests/features --require tests/steps --tags @Regression --format progress"
+    "test": "cucumber-js --require ./core/hooks.js tests/features/**/*.feature --require ./tests/steps/**/*.js --format progress",
+    "test:regression": "cucumber-js tests/features tests/features/**/*.feature --require ./core/hooks.js --require ./tests/steps/**/*.js --tags @Regression --format progress"
   },
   "keywords": [],
   "author": "",
