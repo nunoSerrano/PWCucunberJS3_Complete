@@ -1,6 +1,7 @@
 //HomePage.js
 import BasePage from './BasePage.js';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 export default class HomePage extends BasePage {
@@ -11,28 +12,28 @@ export default class HomePage extends BasePage {
     this.startJourneyButton = this.page.getByRole('link', { name: 'Start your journey' });
   }
 
-  async navigateToPage(pageToNavigate) {
-    console.log(`Navigating to URL: ${pageToNavigate}`);
-    
-     let url = null;
+    async navigateToPage(baseUrl, PageToNavigate) {
+        console.log(`Navigating to : ${PageToNavigate}`);
 
-     switch (pageToNavigate) {
-          case "Monetis": {
-              url= process.env.MONETIS_URL;
-              break;
-          }
-          case "Monetis - Login": {
-              url= process.env.MONETIS_LOGIN_URL;
-              break;
-          }
-          default: {
-              throw new Error(`Page to navigate "${pageToNavigate}" not implemented`)
-          };
-      }
-      
-      await this.baseNavigateToPage(url);
+    let url;
+        switch (PageToNavigate) {
+            case "Monetis": {
+                url = baseUrl;
+                break;
+            }
+            case "Monetis - Login": {
+                url = baseUrl + '/login'; //reads from .env based on environment variable and adds /login
+                break;
+            }
+            default: {
+                throw new Error(`Page to navigate "${PageToNavigate}" not implemented`)
+            };
+        }
 
-  }
+        console.log(`url : ${url}`);         
+        await this.baseNavigateToPage(url);
+
+    }
 
   async clickButton(button) {
 

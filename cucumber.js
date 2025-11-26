@@ -5,9 +5,9 @@ export default {
     formatOptions: { snippetInterface: 'async-await' },
     paths: ['tests/features/**/*.feature'],          // <-- find all .feature files
     require: [
+      'core/World.js', //custom world for Cucumber to get environment variables
       'core/hooks.js', //run this first to initialize browser
       'tests/steps/**/*.js', //then all step definitions
-      'tests/pages/**/*.js' //then all page objects
     ],
     format: ['progress', 'html:cucumber-report.html']
   }
