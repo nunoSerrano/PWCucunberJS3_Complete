@@ -25,9 +25,24 @@ export async function initBrowser() {
     switch (browserype.toLowerCase()) {
 
         case 'chrome_custom':
-            console.log("Launching Chrome browser from custom path");
-            const executablePath = path.resolve(process.env.chrome_custom_path); // Get the custom Chrome executable path from .env
-            browser = await chromium.launch({ headless: false, ...(executablePath ? { executablePath } : {}), args: ['--start-maximized'] });
+            
+            const chromeCustomPath = process.env.chrome_custom_path?.trim();
+
+            // Build options conditionally
+            const launchOptions = {
+                headless: false,
+                args: ['--start-maximized'],
+            };
+
+            if (chromeCustomPath) {
+                console.log("→ Using custom Chrome path:", chromeCustomPath);
+                launchOptions.executablePath = path.resolve(process.env.chrome_custom_path);
+            } else {
+                console.log("→ No custom path provided — using Playwright built-in Chromium");
+            }
+
+            browser = await chromium.launch(launchOptions);
+
             break;
         case 'chrome':
             console.log("Launching Chrome browser");
