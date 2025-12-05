@@ -12,8 +12,7 @@ export default class BasePage {
 
     async baseClickButton(locator) {
 
-        await locator.waitFor({ state: 'visible', timeout: 5000 });
-        await locator.click();
+       await locator.click();
 
     }
 
