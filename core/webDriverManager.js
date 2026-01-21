@@ -4,8 +4,8 @@ import { setDefaultTimeout , Before, After, BeforeAll, AfterAll, BeforeStep} fro
 import {chromium} from "playwright";
 import path from "path"
 import dotenv from 'dotenv';
- dotenv.config();// Load environment variables from .env file
 
+ dotenv.config();// Load environment variables from .env file
 
 let browser;
 let page;
@@ -19,10 +19,10 @@ export async function initBrowser() {
    setDefaultTimeout(timeout);
      
 
-    const browserype= process.env.browser; //browser type from .env file
+    const browsertype= process.env.browser; //browser type from .env file
 
     // Launch the browser based on the specified type
-    switch (browserype.toLowerCase()) {
+    switch (browsertype.toLowerCase()) {
 
         case 'chrome_custom':
             
